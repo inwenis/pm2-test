@@ -13,8 +13,8 @@ RUN apt-get update \
     && apt-get -y autoclean
 
 # nvm environment variables
-ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 22.14.0
+ENV NVM_DIR=/usr/local/nvm
+ENV NODE_VERSION=22.14.0
 
 # install nvm
 # https://github.com/creationix/nvm#install-script
@@ -28,8 +28,8 @@ RUN source $NVM_DIR/nvm.sh \
     && nvm use default
 
 # add node and npm to path so the commands are available
-ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
-ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+ENV NODE_PATH=$NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 WORKDIR /app
 COPY . .
