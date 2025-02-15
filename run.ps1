@@ -1,1 +1,1 @@
-docker run pm2test:latest
+docker run --memory=1024m pm2test:latest
