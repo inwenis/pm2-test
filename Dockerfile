@@ -34,4 +34,6 @@ ENV PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 WORKDIR /app
 COPY . .
 
-CMD ["node", "test1.js"]
+RUN npm install pm2@5.4.3 -g
+
+CMD ["pm2-runtime", "test1.js"]
