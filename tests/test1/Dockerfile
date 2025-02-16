@@ -1,3 +1,4 @@
+# docker build . --tag test1:latest
 FROM debian:bookworm
 
 # based on https://gist.github.com/remarkablemark/aacf14c29b3f01d6900d13137b21db3a
@@ -33,7 +34,3 @@ ENV PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 WORKDIR /app
 COPY . .
-
-RUN npm install pm2@5.4.3 -g
-
-CMD ["pm2-runtime", "app.js"]
