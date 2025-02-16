@@ -1,5 +1,11 @@
 function Get-MemoryUsage() {
     while ($true) {
+        $containers = docker ps --format '{{.ID}},{{.Image}}'
+        $containerDict = @{}
+        $containers | ForEach-Object {
+            $containerId, $imageName = $_.Split(",")
+            $containerDict[$containerId] = $imageName
+        }
         $now = Get-Date -Format "O"
         $stats = docker stats --no-stream --format '{{.MemUsage}},{{.Container}}' # sample output: 63.11MiB / 512MiB,7fa23f1e43da
         $stats | ForEach-Object {
@@ -9,7 +15,7 @@ function Get-MemoryUsage() {
             $memUsageUnit = $match.Groups[2].Value
             $memTotalUnit = $match.Groups[4].Value
             $containerId = $match.Groups[5].Value
-            Write-Output "$now,$containerId,$memUsage,$memUsageUnit,$memTotal,$memTotalUnit" }
+            Write-Output "$now,$containerId,$($containerDict[$containerId]),$memUsage,$memUsageUnit,$memTotal,$memTotalUnit" }
         Start-Sleep -Seconds 10
     }
 }
@@ -20,7 +26,7 @@ if (-not (Test-Path "./out")) {
 
 $timestamp = Get-Date -Format "yyyyMMddHHmmss"
 
-$cont1 = docker run --memory=512m --detach test1-node:latest
-$cont2 = docker run --memory=512m --detach test1-pm2:latest
+docker run --memory=512m --detach test1-node:latest
+docker run --memory=512m --detach test1-pm2:latest
 
 Get-MemoryUsage | Tee-Object "./out/$timestamp.csv"
