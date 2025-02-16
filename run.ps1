@@ -28,5 +28,7 @@ $timestamp = Get-Date -Format "yyyyMMddHHmmss"
 
 docker run --memory=512m --detach test1-node:latest
 docker run --memory=512m --detach test1-pm2:latest
+docker run --memory=512m --detach test2-node:latest
+docker run --memory=512m --detach test2-pm2:latest
 
 Get-MemoryUsage | Tee-Object "./out/$timestamp.csv"
