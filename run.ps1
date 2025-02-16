@@ -12,5 +12,9 @@ function Get-MemoryUsage {
     }
 }
 
+if (-not (Test-Path "./out")) {
+    New-Item -ItemType Directory -Path "./out" | Out-Null
+}
+
 docker run --memory=512m --detach pm2test:latest
-Get-MemoryUsage | Tee-Object "./memory.csv"
+Get-MemoryUsage | Tee-Object "./out/memory.csv"
