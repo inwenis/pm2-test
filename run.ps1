@@ -30,5 +30,7 @@ docker run --memory=512m --detach test1-node:latest
 docker run --memory=512m --detach test1-pm2:latest
 docker run --memory=512m --detach test2-node:latest
 docker run --memory=512m --detach test2-pm2:latest
+docker run --memory=512m --detach test3-node:latest
+docker run --memory=512m --detach test3-pm2:latest
 
 Get-MemoryUsage | Tee-Object "./out/$timestamp.csv"
