@@ -36,4 +36,4 @@ COPY . .
 
 RUN npm install pm2@5.4.3 -g
 
-CMD ["pm2-runtime", "test1.js"]
+CMD ["pm2-runtime", "app.js"]
