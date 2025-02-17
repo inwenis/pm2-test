@@ -10,16 +10,18 @@ setInterval(async () => {
   ];
 
   for (const url of urls) {
+    const n = new Date().toISOString();
     try {
       const r = await axios.get(url);
-      const n = new Date().toISOString();
       console.log(`[${n}] received ${r.data.length} elements from ${url}`);
     } catch (e) {
-      console.error(`Error sending GET to ${url}`, e);
+      console.log(`[${n}] Error sending GET to ${url}`, e);
+      console.error(`[${n}] Error sending GET to ${url}`, e);
     }
   }
 
   const postUrl = 'https://jsonplaceholder.typicode.com/posts';
+  const n = new Date().toISOString();
   try {
     const postData = {
       title: 'foo',
@@ -27,10 +29,10 @@ setInterval(async () => {
       userId: 1
     };
     const postResponse = await axios.post(postUrl, postData);
-    const n = new Date().toISOString();
     console.log(`[${n}] send POST to ${postUrl} received ${postResponse.status} response`);
   } catch (e) {
-    console.error(`Error sending POST to ${postUrl}:`, e);
+    console.log(`[${n}] Error sending POST to ${postUrl}:`, e);
+    console.error(`[${n}] Error sending POST to ${postUrl}:`, e);
   }
 
 }, 10);
