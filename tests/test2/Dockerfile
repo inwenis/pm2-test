@@ -1,4 +1,4 @@
-# docker build . --tag test2:latest
+# docker build . --tag test2:latest --tag test2:{{short}}
 FROM test:latest
 
 COPY app.js .

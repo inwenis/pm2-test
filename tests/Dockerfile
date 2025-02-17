@@ -1,4 +1,4 @@
-# docker build . --tag test:latest
+# docker build . --tag test:latest --tag test:{{short}}
 FROM debian:bookworm
 
 # based on https://gist.github.com/remarkablemark/aacf14c29b3f01d6900d13137b21db3a

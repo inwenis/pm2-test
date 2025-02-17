@@ -1,4 +1,4 @@
-# docker build . --tag test1-pm2:latest
+# docker build . --tag test1-pm2:latest --tag test1-pm2:{{short}}
 FROM test1:latest
 
 COPY . .
