@@ -28,11 +28,15 @@ $timestamp = Get-Date -Format "yyyyMMddHHmmss"
 
 $commitShort = git rev-parse --short HEAD
 
-docker run --memory=512m --detach test1-node:$commitShort
-docker run --memory=512m --detach test1-pm2:$commitShort
-docker run --memory=512m --detach test2-node:$commitShort
-docker run --memory=512m --detach test2-pm2:$commitShort
-docker run --memory=512m --detach test3-node:$commitShort
-docker run --memory=512m --detach test3-pm2:$commitShort
+$commands = docker images `
+  | Select-String -Pattern $commitShort ` # get images build from current commit
+  | Select-String -Pattern "\-" ` # runable images have a dash in their name
+  | ForEach-Object { [Regex]::Match($_, '(\S+)\s').Groups[1].Value } ` # extract name
+  | Sort-Object
+  | ForEach-Object { "docker run --memory=512m --detach $($_):$commitShort" }
+
+Write-Host "Will run the following images:"
+$commands | Write-Host
+$commands | Invoke-Expression
 
 Get-MemoryUsage | Tee-Object "./out/$timestamp.csv"
