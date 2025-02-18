@@ -1,6 +1,6 @@
 {
     "apps": [{
-        "name": "test3",
+        "name": "test4",
         "script": "./app.js"
     }]
 }
