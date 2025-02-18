@@ -1,3 +1,5 @@
+Set-StrictMode -Version Latest
+
 function Get-MemoryUsage() {
     while ($true) {
         $containers = docker ps --format '{{.ID}},{{.Image}}'
