@@ -8,7 +8,11 @@ open Plotly.NET
 type CSVData = CsvProvider<"./out/20250216220844.csv", HasHeaders=false>
 
 let lines =
-    use x = CSVData.Load "./out/20250216220844.csv"
+    let file =
+        Directory.GetFiles "./out"
+        |> Array.sortDescending
+        |> Array.head
+    use x = CSVData.Load file
     x.Rows |> Seq.toList
 
 let toChartable (lines: CSVData.Row list) =
