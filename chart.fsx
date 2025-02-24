@@ -5,7 +5,7 @@ open FSharp.Data
 #r "nuget: Plotly.NET"
 open Plotly.NET
 
-type CSVData = CsvProvider<"./out/20250216220844.csv", HasHeaders=false>
+type CSVData = CsvProvider<"./out/20250222154948.csv", HasHeaders=false>
 
 let lines =
     let file =
